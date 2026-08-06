@@ -3,11 +3,9 @@ const fs = require('fs');
 
 const TOKEN = process.env.NOTION_TOKEN;
 const DB_IDS = {
-  ba:       '355e7566e74b815899cfe47f46e04f25',
-  pr:       '355e7566e74b814ea9a4e0e5fef2eb12',
   master:   '35ae7566e74b81a09d81cdefac0c90b6',
   lawlit:   '366e7566e74b806da1a9dfc2a70cdd99',
-  directed: 'd04599a832c0455fbfc4599bb226229d',
+  cxkcm:    '7c9fa2d9-4443-4946-8ccd-1ee0361b1395',
 };
 
 function notionRequest(path, body) {
@@ -84,7 +82,7 @@ function parseLawlit(page) {
   return { text: label || '(untitled)', due: dueDate, type, done };
 }
 
-async function queryDB(dbId, isLawlit) {
+async function queryDB(dbId, isLawlit, isCxkcm) {
   const results = [];
   let cursor = undefined;
   do {
@@ -98,6 +96,13 @@ async function queryDB(dbId, isLawlit) {
     for (const page of (res.results || [])) {
       if (isLawlit) {
         results.push(parseLawlit(page));
+      } else if (isCxkcm) {
+        const props = page.properties;
+        const name = getText(props['Project Name']);
+        const status = getText(props['Status']);
+        if (status === 'In Progress' && name && name !== '(untitled)') {
+          results.push({ text: name, status, done: false });
+        }
       } else {
         results.push({ text: getTitle(page), done: isDone(page) });
       }
@@ -112,7 +117,7 @@ async function main() {
   const data = {};
   for (const [key, id] of Object.entries(DB_IDS)) {
     console.log(`  Fetching ${key}...`);
-    data[key] = await queryDB(id, key === 'lawlit');
+    data[key] = await queryDB(id, key === 'lawlit', key === 'cxkcm');
     console.log(`  -> ${data[key].length} items`);
   }
   fs.writeFileSync('notion-data.json', JSON.stringify(data, null, 2));
