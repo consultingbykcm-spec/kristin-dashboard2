@@ -179,25 +179,26 @@ button:hover{background:var(--cream)}
     </div>
     <div class="wg-grid">
       <div class="wg-col">
-        <div class="wg-course">⚖️ Business Associations</div>
-        <div class="wg-topic" id="ba-wg-topic"></div>
-        <div id="ba-wg-items"></div>
+        <div class="wg-course">🎓 Capstone</div>
+        <div class="wg-topic">Starts Aug 24 — syllabus coming Aug 22</div>
+        <div id="capstone-wg-items"></div>
       </div>
       <div class="wg-divider"></div>
       <div class="wg-col">
-        <div class="wg-course">📜 Professional Responsibility</div>
-        <div class="wg-topic" id="pr-wg-topic"></div>
-        <div id="pr-wg-items"></div>
+        <div class="wg-course">📚 Bar Studies</div>
+        <div class="wg-topic">Barbri · UWorld · Fleming's · Themis</div>
+        <div id="bar-wg-items"></div>
       </div>
     </div>
   </div>
 
   <!-- META PILLS -->
   <div class="meta-row">
-    <span class="pill pill-law">Pro bono — Tue meeting</span>
     <span class="pill pill-work">Pondel 1–4pm daily (M–F)</span>
-    <span class="pill pill-school">Summer 2026 · 3 classes</span>
-    <span class="pill pill-book">Ferlina book in progress</span>
+    <span class="pill pill-school">Fall 2026 · Capstone + Bar Studies</span>
+    <span class="pill pill-school">Classes start Aug 24 · Syllabus Aug 22</span>
+    <span class="pill pill-law">School Pro Bono — new requirement</span>
+    <span class="pill pill-book">DS → Journal entry w/ Dean</span>
   </div>
 
   <div class="grid">
@@ -225,24 +226,34 @@ button:hover{background:var(--cream)}
     <div class="card accent-teal grid-wide">
       <div class="card-header">
         <div class="card-title">🗂 Active Projects</div>
-        <span class="card-badge badge-teal">4 in progress</span>
+        <span class="card-badge badge-teal" id="projectCount"></span>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 2rem">
-        <div class="project-item">
-          <div class="project-name">⚖️ Pro Bono Case <span class="card-badge badge-rose">Tue meeting</span></div>
-          <div class="project-next">Prepare materials · Review action items</div>
+      <div style="display:grid;grid-template-columns:1fr 1px 1fr;gap:1.25rem" id="projectsGrid">
+        <!-- Law & School -->
+        <div>
+          <div style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.05em;color:var(--warm-gray);margin-bottom:10px">⚖️ Law &amp; School</div>
+          <div class="project-item">
+            <div class="project-name">🎓 Capstone</div>
+            <div class="project-next">Starts Aug 24 · Syllabus Aug 22 · Due Sundays</div>
+          </div>
+          <div class="project-item">
+            <div class="project-name">📚 Bar Studies</div>
+            <div class="project-next">Barbri · UWorld · Fleming's · Themis (MPRE) · Ends Dec 5–6</div>
+          </div>
+          <div class="project-item">
+            <div class="project-name">🤝 School Pro Bono</div>
+            <div class="project-next">New school requirement</div>
+          </div>
+          <div class="project-item">
+            <div class="project-name">📖 Directed Study → Journal</div>
+            <div class="project-next">Credit awarded · Meeting Thu w/ Dean · Journal entry next</div>
+          </div>
         </div>
-        <div class="project-item">
-          <div class="project-name">📚 Directed Study</div>
-          <div class="project-next">Meet w/ Dean re: benchmarks · Research new Q</div>
-        </div>
-        <div class="project-item">
-          <div class="project-name">📖 Ferlina Children's Book</div>
-          <div class="project-next">Printing · ISBN · Audiobook</div>
-        </div>
-        <div class="project-item">
-          <div class="project-name">💼 Pondel Law Firm</div>
-          <div class="project-next">Mon–Fri 1–4pm · Part-time</div>
+        <div style="background:var(--light-border)"></div>
+        <!-- Consulting by KCM -->
+        <div>
+          <div style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.05em;color:var(--warm-gray);margin-bottom:10px">💼 Consulting by KCM</div>
+          <div id="cxkcmProjects"><div class="empty-state">Loading projects...</div></div>
         </div>
       </div>
     </div>
@@ -268,44 +279,24 @@ button:hover{background:var(--cream)}
         <button class="course-tab" data-tab="ls">Law & Literature</button>
       </div>
 
-      <div class="course-panel active" id="panel-ba">
-        <div style="font-size:11px;color:var(--warm-gray);margin-bottom:8px">Prof. Aaron Tenzer · 3 units · Final exam only</div>
-        <div class="week-nav">
-          <div><div class="week-label" id="ba-wk-label">Week 1</div><div class="week-dates" id="ba-wk-dates"></div></div>
-          <div class="week-btns"><button class="week-btn" id="ba-prev">← Prev</button><button class="week-btn" id="ba-next">Next →</button></div>
-        </div>
-        <div class="week-topic" id="ba-topic"></div>
-        <div class="readings-label">📖 Readings</div>
-        <div id="ba-readings"></div>
+      <div class="course-panel active" id="panel-capstone">
+        <div style="font-size:11px;color:var(--warm-gray);margin-bottom:8px">Starts Aug 24 · Syllabus Aug 22 · Weekly assignments due Sundays · Ends Dec 5–6</div>
         <div class="assign-label">📝 Assignments</div>
-        <div id="ba-assigns"></div>
-        <div class="course-add"><input type="text" id="ba-add-in" placeholder="Add note for this week..."/><button id="ba-add-btn">Add</button></div>
+        <div id="capstone-assigns"><div class="empty-state">Syllabus available Aug 22 — add assignments below</div></div>
+        <div class="course-add"><input type="text" id="capstone-add-in" placeholder="Add assignment..."/><button id="capstone-add-btn">Add</button></div>
       </div>
 
-      <div class="course-panel" id="panel-pr">
-        <div style="font-size:11px;color:var(--warm-gray);margin-bottom:6px">Assoc. Dean April Vincent · 3 units · Midterm 15% + Final 85%</div>
-        <div class="week-nav">
-          <div><div class="week-label" id="pr-wk-label">Week 1</div><div class="week-dates" id="pr-wk-dates"></div></div>
-          <div class="week-btns"><button class="week-btn" id="pr-prev">← Prev</button><button class="week-btn" id="pr-next">Next →</button></div>
-        </div>
-        <div class="week-topic" id="pr-topic"></div>
-        <div class="readings-label">📖 Readings</div>
-        <div id="pr-readings"></div>
-        <div class="assign-label">📝 Assignments</div>
-        <div id="pr-assigns"></div>
-        <div class="course-add"><input type="text" id="pr-add-in" placeholder="Add note for this week..."/><button id="pr-add-btn">Add</button></div>
+      <div class="course-panel" id="panel-bar">
+        <div style="font-size:11px;color:var(--warm-gray);margin-bottom:8px">Starts Aug 24 · Barbri · UWorld · Fleming's · Themis (MPRE) · Ends Dec 5–6</div>
+        <div class="assign-label">📚 Study Resources</div>
+        <div class="reading-item">Barbri — primary bar prep</div>
+        <div class="reading-item">UWorld — practice questions</div>
+        <div class="reading-item">Fleming's — supplemental</div>
+        <div class="reading-item">Themis — MPRE prep</div>
+        <div class="assign-label">📝 Tasks</div>
+        <div id="bar-assigns"><div class="empty-state">Add bar prep tasks below</div></div>
+        <div class="course-add"><input type="text" id="bar-add-in" placeholder="Add bar prep task..."/><button id="bar-add-btn">Add</button></div>
       </div>
-
-      <div class="course-panel" id="panel-ls">
-        <div style="font-size:11px;color:var(--warm-gray);margin-bottom:8px">Prof. Eric Lane · 2 units · Santa Barbara College of Law · Starts May 20</div>
-        <div style="font-size:13px;color:var(--charcoal);margin-bottom:10px">Wednesdays 6:30–9:30pm</div>
-        <div class="readings-label">📅 Class Dates</div>
-        <div id="ls-dates"></div>
-        <div class="assign-label">📝 Notes & Assignments</div>
-        <div id="ls-assigns"></div>
-        <div class="course-add"><input type="text" id="ls-add-in" placeholder="Add reading or assignment..."/><button id="ls-add-btn">Add</button></div>
-      </div>
-    </div>
 
     <!-- DAILY NOTES -->
     <div class="card grid-wide" style="border-top:3px solid var(--charcoal)">
