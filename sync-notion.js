@@ -5,7 +5,7 @@ const TOKEN = process.env.NOTION_TOKEN;
 const DB_IDS = {
   master:   '35ae7566e74b81a09d81cdefac0c90b6',
   lawlit:   '366e7566e74b806da1a9dfc2a70cdd99',
-  cxkcm:    '7c9fa2d9-4443-4946-8ccd-1ee0361b1395',
+  cxkcm:    'ba57fec4800c45df9a950803b82d7964',
 };
 
 function notionRequest(path, body) {
