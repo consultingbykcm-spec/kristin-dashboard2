@@ -309,85 +309,48 @@ button:hover{background:var(--cream)}
 
 <script>
 // ── DATA ──────────────────────────────────────────────
-const WED_DATES=['2026-05-20','2026-05-27','2026-06-03','2026-06-10','2026-06-17','2026-06-24','2026-07-01','2026-07-08','2026-07-15','2026-07-22'];
-const LS_DATES=['May 20','May 27','Jun 3','Jun 10','Jun 17','Jun 24','Jul 1','Jul 8','Jul 15','Jul 22'];
 const DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 const QUOTES=[
   {q:"Real change, enduring change, happens one step at a time.",a:"Ruth Bader Ginsburg"},
   {q:"Fight for the things that you care about, but do it in a way that will lead others to join you.",a:"Ruth Bader Ginsburg"},
-  {q:"My dissent is a sign of my respect for the Constitution.",a:"Ruth Bader Ginsburg"},
   {q:"None of us got where we are solely by pulling ourselves up by our bootstraps.",a:"Thurgood Marshall"},
   {q:"In recognizing the humanity of our fellow beings, we pay ourselves the highest tribute.",a:"Thurgood Marshall"},
-  {q:"Where you see wrong or inequality or injustice, speak out, because this is your country.",a:"Thurgood Marshall"},
   {q:"We are all implicated when we allow other people to be mistreated.",a:"Bryan Stevenson"},
   {q:"Each of us is more than the worst thing we've ever done.",a:"Bryan Stevenson"},
   {q:"The true measure of our character is how we treat the poor, the disfavored, the accused.",a:"Bryan Stevenson"},
-  {q:"Proximity to the condemned and the forgotten changes us.",a:"Bryan Stevenson"},
-  {q:"Justice is not the law. Justice is what the law is supposed to deliver.",a:"Bryan Stevenson"},
   {q:"Injustice anywhere is a threat to justice everywhere.",a:"Martin Luther King Jr."},
   {q:"The arc of the moral universe is long, but it bends toward justice.",a:"Martin Luther King Jr."},
-  {q:"One has a moral responsibility to disobey unjust laws.",a:"Martin Luther King Jr."},
   {q:"I am no longer accepting the things I cannot change. I am changing the things I cannot accept.",a:"Angela Davis"},
   {q:"Without struggle, there is no progress.",a:"Frederick Douglass"},
-  {q:"It is easier to build strong children than to repair broken men.",a:"Frederick Douglass"},
   {q:"Not everything that is faced can be changed, but nothing can be changed until it is faced.",a:"James Baldwin"},
   {q:"The law is not the private property of lawyers, nor is justice the exclusive province of judges.",a:"Sandra Day O'Connor"},
-  {q:"We do not need to become heroes overnight. We can do it gradually, one step at a time.",a:"Eleanor Roosevelt"},
   {q:"There is no greater tyranny than that which is perpetrated under the shield of the law.",a:"Montesquieu"},
   {q:"Law is reason, free from passion.",a:"Aristotle"},
-  {q:"I would not look to the U.S. Constitution if I were drafting a constitution in the year 2012.",a:"Ruth Bader Ginsburg"},
   {q:"The most common way people give up their power is by thinking they don't have any.",a:"Alice Walker"},
-  {q:"You can't separate peace from freedom because no one can be at peace unless they have freedom.",a:"Malcolm X"},
-  {q:"To sin by silence when they should protest makes cowards of men.",a:"Ella Wheeler Wilcox"},
-  {q:"I was not ladylike, nor was I manly. I was something else altogether.",a:"Constance Baker Motley"},
   {q:"The power of the lawyer is in the uncertainty of the law.",a:"Jeremy Bentham"},
+  {q:"Proximity to the condemned and the forgotten changes us.",a:"Bryan Stevenson"},
+  {q:"To sin by silence when they should protest makes cowards of men.",a:"Ella Wheeler Wilcox"},
 ];
 
-const BA_DATA=[
-  {week:1,dates:'May 4–10',topic:'Overview of Business Associations & Agency Law Part 1',readings:['Ch. 1: all','Ch. 2: pp. 31–51','Tax Obligations for Each Business Type (online)','Restatement (Third) of Agency – selected provisions'],assignments:[{text:'Intro Discussion — post by WEDNESDAY 11:59pm (attendance)',due:'Wed May 7',done:false},{text:'Business Entity Chart (4 pts) — due Sunday 11:59pm',due:'Sun May 10',done:false},{text:'Practice Problems (4 pts) — due Sunday 11:59pm',due:'Sun May 10',done:false}]},
-  {week:2,dates:'May 11–17',topic:'Agency Law Part 2',readings:['Ch. 2: pp. 75–85'],assignments:[{text:'Client Advice Letter (4 pts) — due Sunday 11:59pm',due:'Sun May 17',done:false}]},
-  {week:3,dates:'May 18–24',topic:'General Partnerships & LLPs',readings:['Ch. 4: all','Ch. 2: pp. 52–63','Uniform Partnership Act RUPA (online)'],assignments:[{text:'Practice Problems (4 pts) — due Sunday 11:59pm',due:'Sun May 24',done:false}]},
-  {week:4,dates:'May 25–31',topic:'Limited Partnerships & LLLPs ⚠️ Residency May 30–31',readings:['Ch. 5: all','Uniform Limited Partnership Act ULPA (online)'],assignments:[{text:'Bar Exam Essay Outline (C/I) — due SATURDAY 11:59pm',due:'Sat May 30',done:false}]},
-  {week:5,dates:'Jun 1–7',topic:'Limited Liability Companies (LLC)',readings:['Ch. 6: all','Ch. 2: pp. 66–74','Ch. 3: pp. 105–134','RULLCA & DLLCA (online)'],assignments:[{text:'Practice Problems (4 pts) — due Sunday 11:59pm',due:'Sun Jun 7',done:false}]},
-  {week:6,dates:'Jun 8–14',topic:'Midterm Exam Week',readings:['Review Week 1–5 Lecture Slides'],assignments:[{text:'Midterm Exam (50 pts) — does NOT count toward final',due:'Sun Jun 14',done:false}]},
-  {week:7,dates:'Jun 15–21',topic:'Corporations: Incorporation & Corporate Finance',readings:['Ch. 7: pp. 278–305','Ch. 8: pp. 333–344, 374–390','DGCL & MBCA (online)'],assignments:[{text:'Charter Exercise (4 pts) — due Sunday 11:59pm',due:'Sun Jun 21',done:false}]},
-  {week:8,dates:'Jun 22–28',topic:'Corporations: Corporate Governance',readings:['Ch. 9: all','Ch. 2: pp. 64–65','Aspen Audio: Ch. 2 & 3'],assignments:[{text:'Practice Problems (4 pts) — due Sunday 11:59pm',due:'Sun Jun 28',done:false}]},
-  {week:9,dates:'Jun 29–Jul 5',topic:'Corporations: Corporate Fiduciary Duties',readings:['Ch. 10: all','Aspen Audio: Ch. 6 & 7'],assignments:[{text:'Practice Problems (4 pts) — due Sunday 11:59pm',due:'Sun Jul 5',done:false}]},
-  {week:10,dates:'Jul 6–12',topic:'Corporations: Minority Shareholder Protections ⚠️ Residency Jul 11–12',readings:['Ch. 10 continued'],assignments:[{text:'Bar Exam Essay Outline (C/I) — due SATURDAY 11:59pm',due:'Sat Jul 11',done:false}]},
-  {week:11,dates:'Jul 13–19',topic:'Corporations: Public Company Regulation & M&A',readings:['Ch. 13: all','Ch. 14: pp. 677–725','Aspen Audio: Ch. 8–12'],assignments:[{text:'Bar Exam Essay (4 pts) — due Sunday 11:59pm',due:'Sun Jul 19',done:false}]},
-  {week:12,dates:'Jul 20–26',topic:'Collaborative Course Review',readings:['Ch. 12: all','Review Week 1–10 Lecture Slides'],assignments:[{text:'Discussion: Student Lecture Video (C/I) — initial post Sun, replies Tue Jul 28',due:'Sun Jul 26',done:false}]},
-  {week:13,dates:'Jul 27–Aug 2',topic:'Final Exam Prep ⚠️ Final Exam Residency Aug 3–4',readings:['Review exam rubrics','Final Exam Review materials'],assignments:[{text:'Discussion: Bar Exam Essay Self-Assessment — due THURSDAY 11:59pm',due:'Thu Jul 30',done:false},{text:'⚠️ FINAL EXAM — Residency 4: August 3–4',due:'Aug 3–4',done:false}]},
-];
+// ── STATE ──────────────────────────────────────────────
+const now = new Date();
+const todayStr = now.toISOString().slice(0,10);
 
-const PR_DATA=[
-  {week:1,dates:'May 4–10',topic:'Introduction to Legal Ethics',readings:['Textbook: pp. 21–22; Problem 1 (pp. 23–42)','Rules Supp.: ABA & CA Rules 5.5, 8.1, 8.3'],assignments:[{text:'Intro Discussion — post by WEDNESDAY 11:59pm (attendance)',due:'Wed May 7',done:false},{text:'Week 1 Discussion: Moral Character Application (6 pts) — initial post Sun, replies Tue',due:'Sun May 10',done:false}]},
-  {week:2,dates:'May 11–17',topic:'Regulation of the Legal Profession',readings:['Textbook: Problems 2–3 (pp. 42–79)','Rules: ABA & CA Rules 1.1, 1.3, 8.1, 8.3, 8.4, 8.5; CA Rule 1.42'],assignments:[{text:'Quiz (4 pts) — West Academic Module 1 Parts 1 & 2',due:'Sun May 17',done:false}]},
-  {week:3,dates:'May 18–24',topic:'The Client-Lawyer Relationship',readings:['Textbook: Problem 4 (pp. 81–98)','Rules: ABA & CA Rules 1.18, 6.5, 1.2, 1.4','Textbook: Problems 5–6 (pp. 99–131)','Rules: ABA & CA Rules 1.5, 1.15, 1.16; CA Rule 1.51'],assignments:[{text:'Activity: IRAC two issues from bar exam fact pattern',due:'Sun May 24',done:false},{text:'Quiz (4 pts) — West Academic Module 2',due:'Sun May 24',done:false}]},
-  {week:4,dates:'May 25–31',topic:"Protecting Client's Interests ⚠️ Residency this weekend",readings:['Textbook: Problems 7–8 (pp. 131–170)','Rules: ABA & CA Rules 1.6, 4.4, 4.1','Textbook: Problem 9 (pp. 171–185)','Rules: ABA & CA Rules 1.7–1.13'],assignments:[{text:'Activity: IRAC two issues from bar exam fact pattern (4 pts)',due:'Sun May 31',done:false}]},
-  {week:5,dates:'Jun 1–7',topic:'Conflicts of Interest',readings:['Textbook: Problems 10–12 (pp. 185–235)','Rules: ABA & CA Rules 1.7–1.13 (continued)'],assignments:[{text:'Bar Exam Practice Essay (4 pts)',due:'Sun Jun 7',done:false}]},
-  {week:6,dates:'Jun 8–14',topic:'Conflicts of Interest (cont.)',readings:['Textbook: Problems 13–15 (pp. 235–280)','Rules: ABA & CA Rules 1.7–1.13 (continued)'],assignments:[{text:'Study for Midterm (Weeks 1–6)',due:'Sun Jun 14',done:false},{text:'Q&A with Instructor (C/I) — date/time TBA on Canvas',due:'TBA',done:false}]},
-  {week:7,dates:'Jun 15–21',topic:'Lawyer as Advisor; Midterm ⚠️ Lawyering Skills Residency',readings:['Textbook: Problems 16–18 (pp. 281–333)','Rules: ABA & CA Rules 1.2, 2.1, 4.2, 4.3; ABA Rule 1.14'],assignments:[{text:'⚠️ MIDTERM EXAM — covers Weeks 1–6 (15% of grade)',due:'Week 7',done:false},{text:'Quiz (4 pts) — West Academic Modules 7 & 8',due:'Sun Jun 21',done:false}]},
-  {week:8,dates:'Jun 22–28',topic:'Lawyer as Negotiator & Evaluator',readings:['Textbook: Problems 19–20 (pp. 333–367, skip #21)','Rules: ABA & CA Rules 1.2, 2.1, 3.4, 4.1; ABA Rule 2.3'],assignments:[{text:'Quiz (4 pts) — West Academic Modules 3 & 4',due:'Sun Jun 28',done:false}]},
-  {week:9,dates:'Jun 29–Jul 5',topic:'Lawyer as Advocate',readings:['Textbook: Problems 22–24 (pp. 391–448)','Rules: ABA & CA Rules 3.1, 3.2, 3.3, 3.4, 3.7; FRCP 11'],assignments:[{text:'Quiz (4 pts) — West Academic Modules 6 & 4 Part 2',due:'Sun Jul 5',done:false}]},
-  {week:10,dates:'Jul 6–12',topic:'Criminal Defense & Prosecutor Obligations ⚠️ Residency this weekend',readings:['Textbook: Problems 25–26 (pp. 448–490)','Rules: ABA & CA Rules 1.6, 3.3, 1.2, 1.4, 3.8'],assignments:[{text:'Quiz (4 pts) — West Academic Modules 5 & 9',due:'Sun Jul 12',done:false}]},
-  {week:11,dates:'Jul 13–19',topic:"Lawyers' Duties to Court and Public",readings:['Textbook: Problem 27 (pp. 491–512, skip #28)','Rules: ABA & CA Rules 3.4, 3.5, 3.6, 8.4'],assignments:[{text:'Discussion: Hypo (6 pts) — initial post Sun, replies Tue Jul 21',due:'Sun Jul 19',done:false},{text:'Q&A with Instructor (C/I) — date/time TBA on Canvas',due:'TBA',done:false}]},
-  {week:12,dates:'Jul 20–26',topic:'Promoting Legal Services',readings:['Textbook: Problems 29–30, 36 (pp. 527–563, 665–684)','Rules: ABA & CA Rules 7.1, 7.2, 7.3, 1.1, 1.5, 8.2; CA Rules 7.4, 7.5'],assignments:[{text:'Bar Exam Practice Essay (4 pts)',due:'Sun Jul 26',done:false}]},
-  {week:13,dates:'Jul 27–Aug 2',topic:'Finals ⚠️ Finals Residency this week!',readings:['Review homework essay','Final Exam Review materials'],assignments:[{text:'Update outlines, flashcards, study tools',due:'Week 13',done:false},{text:'⚠️ FINAL EXAM — Finals Residency (85% of grade)',due:'Jul 27–Aug 2',done:false}]},
+let tasks = JSON.parse(localStorage.getItem('kd3-tasks')||'null') || [];
+let reminders = JSON.parse(localStorage.getItem('kd3-rem')||'null') || [
+  'Pondel Law Firm: Mon-Fri 1-4pm',
+  'Weekly assignments due every Sunday 11:59pm',
+  'Classes start Aug 24 — syllabus Aug 22',
 ];
+let capstoneAssigns = JSON.parse(localStorage.getItem('kd3-capstone')||'null') || [];
+let barAssigns = JSON.parse(localStorage.getItem('kd3-bar')||'null') || [];
 
-const DEF_TASKS=[
-  {id:1,text:'Prepare for Tuesday pro bono meeting',tag:'Pro bono',done:false},
-  {id:2,text:'Review case action items',tag:'Pro bono',done:false},
-  {id:3,text:'Schedule meeting with Dean — benchmarks',tag:'Directed study',done:false},
-  {id:4,text:"Research Dean's latest suggested question",tag:'Directed study',done:false},
-  {id:5,text:'Work with provider on book printing',tag:'Ferlina book',done:false},
-  {id:6,text:'Obtain ISBN number',tag:'Ferlina book',done:false},
-  {id:7,text:'Explore audiobook creation',tag:'Ferlina book',done:false},
-];
-const DEF_REMINDERS=['Pro bono next meeting: Tuesday','Both BA & PR: assignments due every Sunday 11:59pm','🚫 PR: zero AI policy — all work must be your own'];
-
+function saveT(){localStorage.setItem('kd3-tasks',JSON.stringify(tasks))}
+function saveR(){localStorage.setItem('kd3-rem',JSON.stringify(reminders))}
+function saveCapstone(){localStorage.setItem('kd3-capstone',JSON.stringify(capstoneAssigns))}
+function saveBar(){localStorage.setItem('kd3-bar',JSON.stringify(barAssigns))}
 
 // ── NOTION SYNC ──────────────────────────────────────
 let notionTasks = null;
@@ -397,69 +360,39 @@ async function loadNotionTasks() {
     const res = await fetch('notion-data.json?_=' + Date.now());
     if (!res.ok) throw new Error('no data file');
     const data = await res.json();
-    // Flatten all databases into one list, skip done items
-    // lawlit is handled separately in the courses tab
+
+    if (data.cxkcm && data.cxkcm.length > 0) {
+      window._cxkcmProjects = data.cxkcm;
+      renderCxkcm();
+    }
+
+    if (data.lawlit && data.lawlit.length > 0) {
+      window._notionLawlit = data.lawlit;
+    }
+
     const all = [];
-    const labels = {ba:'BA',pr:'PR',master:'Dashboard',directed:'Directed Study'};
-    for (const [key, items] of Object.entries(data)) {
-      if (key === 'lawlit') continue;
-      for (const item of items) {
+    if (data.master) {
+      for (const item of data.master) {
         if (!item.done && item.text && item.text !== '(untitled)') {
-          all.push({id: key+'_'+Math.random(), text: item.text, tag: labels[key]||key, done: false});
+          all.push({id: 'master_'+Math.random(), text: item.text, tag: 'Dashboard', done: false});
         }
       }
     }
-    // Store lawlit separately for the courses tab
-    if (data.lawlit && data.lawlit.length > 0) {
-      window._notionLawlit = data.lawlit;
-      renderLS();
-    }
-    if (all.length > 0) {
-      notionTasks = all;
-      renderTasks();
-    }
-  } catch(e) {
-    // Notion data not available yet — fall back to localStorage tasks
-  }
+    if (all.length > 0) { notionTasks = all; renderTasks(); }
+  } catch(e) {}
 }
-
-// ── STATE ──────────────────────────────────────────────
-const now=new Date();
-const todayStr=now.toISOString().slice(0,10);
-
-let tasks=JSON.parse(localStorage.getItem('kd3-tasks')||'null')||DEF_TASKS.map(t=>({...t}));
-let reminders=JSON.parse(localStorage.getItem('kd3-rem')||'null')||[...DEF_REMINDERS];
-let baData=JSON.parse(localStorage.getItem('kd3-ba')||'null')||JSON.parse(JSON.stringify(BA_DATA));
-let prData=JSON.parse(localStorage.getItem('kd3-pr')||'null')||JSON.parse(JSON.stringify(PR_DATA));
-let lsAssigns=JSON.parse(localStorage.getItem('kd3-ls')||'null')||[];
-
-function getCurrentWeekIdx(){
-  const start=new Date('2026-05-04');
-  const diff=Math.floor((now-start)/(7*24*3600*1000));
-  return Math.max(0,Math.min(12,diff));
-}
-let baWeek=parseInt(localStorage.getItem('kd3-ba-week')||'-1');
-let prWeek=parseInt(localStorage.getItem('kd3-pr-week')||'-1');
-if(baWeek<0) baWeek=getCurrentWeekIdx();
-if(prWeek<0) prWeek=getCurrentWeekIdx();
-
-function saveT(){localStorage.setItem('kd3-tasks',JSON.stringify(tasks))}
-function saveR(){localStorage.setItem('kd3-rem',JSON.stringify(reminders))}
-function saveBA(){localStorage.setItem('kd3-ba',JSON.stringify(baData));localStorage.setItem('kd3-ba-week',baWeek)}
-function savePR(){localStorage.setItem('kd3-pr',JSON.stringify(prData));localStorage.setItem('kd3-pr-week',prWeek)}
-function saveLS(){localStorage.setItem('kd3-ls',JSON.stringify(lsAssigns))}
 
 // ── CLOCK & DATE ──────────────────────────────────────
-function updateClock(){
-  const n=new Date(),h=n.getHours(),m=n.getMinutes();
-  const ap=h>=12?'pm':'am',dh=h%12||12;
-  document.getElementById('clock').textContent=dh+':'+(m<10?'0':'')+m+' '+ap;
-}
 function getGreeting(){
   const h=new Date().getHours();
   if(h>=4&&h<12) return 'Good morning,';
   if(h>=12&&h<18) return 'Good afternoon,';
   return 'Good evening,';
+}
+function updateClock(){
+  const n=new Date(),h=n.getHours(),m=n.getMinutes();
+  const ap=h>=12?'pm':'am',dh=h%12||12;
+  document.getElementById('clock').textContent=dh+':'+(m<10?'0':'')+m+' '+ap;
 }
 document.getElementById('greeting').textContent=getGreeting();
 document.getElementById('dateline').textContent=DAYS[now.getDay()]+', '+MONTHS[now.getMonth()]+' '+now.getDate()+', '+now.getFullYear();
@@ -470,45 +403,38 @@ updateClock();setInterval(updateClock,15000);
 function renderQuote(){
   const day=Math.floor(Date.now()/(1000*60*60*24));
   const q=QUOTES[day%QUOTES.length];
-  document.getElementById('quoteText').textContent='\u201c'+q.q+'\u201d';
-  document.getElementById('quoteAttr').textContent='\u2014 '+q.a;
+  document.getElementById('quoteText').textContent='"'+q.q+'"';
+  document.getElementById('quoteAttr').textContent='— '+q.a;
 }
 
 // ── WEEK AT A GLANCE ──────────────────────────────────
 function renderWeekGlance(){
-  const wIdx=getCurrentWeekIdx();
-  const wNum=wIdx+1;
-  document.getElementById('wgBadge').textContent='Week '+wNum+' of 13';
-  document.getElementById('ba-wg-topic').textContent=baData[wIdx].topic;
-  document.getElementById('pr-wg-topic').textContent=prData[wIdx].topic;
+  const start=new Date('2026-08-24');
+  const diff=Math.floor((now-start)/(7*24*3600*1000));
+  const wNum=Math.max(1,diff+1);
+  const badge=document.getElementById('wgBadge');
+  if(badge) badge.textContent=now<start?'Starts Aug 24':'Week '+wNum;
 
-  const baEl=document.getElementById('ba-wg-items');baEl.innerHTML='';
-  baData[wIdx].assignments.slice(0,3).forEach(a=>{
-    const row=document.createElement('div');row.className='wg-item';
-    const dot=document.createElement('div');dot.className='wg-dot';dot.style.background='var(--accent-teal)';
-    const txt=document.createElement('div');txt.className=a.done?'wg-done':'';txt.textContent=a.text;
-    row.appendChild(dot);row.appendChild(txt);baEl.appendChild(row);
-  });
-
-  const prEl=document.getElementById('pr-wg-items');prEl.innerHTML='';
-  prData[wIdx].assignments.slice(0,3).forEach(a=>{
-    const row=document.createElement('div');row.className='wg-item';
-    const dot=document.createElement('div');dot.className='wg-dot';dot.style.background='var(--accent-rose)';
-    const txt=document.createElement('div');txt.className=a.done?'wg-done':'';txt.textContent=a.text;
-    row.appendChild(dot);row.appendChild(txt);prEl.appendChild(row);
-  });
+  const cEl=document.getElementById('capstone-wg-items');
+  if(cEl){
+    const open=capstoneAssigns.filter(a=>!a.done).slice(0,2);
+    cEl.innerHTML=open.length?open.map(a=>`<div class="wg-item"><div class="wg-dot" style="background:var(--accent-teal)"></div><div>${a.text}</div></div>`).join(''):'<div style="font-size:11px;color:var(--warm-gray);font-style:italic">Syllabus coming Aug 22</div>';
+  }
+  const bEl=document.getElementById('bar-wg-items');
+  if(bEl){
+    const open=barAssigns.filter(a=>!a.done).slice(0,2);
+    bEl.innerHTML=open.length?open.map(a=>`<div class="wg-item"><div class="wg-dot" style="background:var(--accent-navy)"></div><div>${a.text}</div></div>`).join(''):'<div style="font-size:11px;color:var(--warm-gray);font-style:italic">Add bar prep tasks below</div>';
+  }
 }
 
 // ── SCHEDULE ─────────────────────────────────────────
 function buildSchedule(){
-  const isWed=WED_DATES.includes(todayStr);
   const isSun=now.getDay()===0;
   const isWeekday=now.getDay()>=1&&now.getDay()<=5;
   const items=[
     isWeekday?{time:'1:00 pm',label:'Pondel Law Firm',tag:'Work'}:null,
-    isWed?{time:'6:30 pm',label:'Law & Storytelling — Eric Lane',tag:'Class'}:null,
-    isSun?{time:'Due today',label:'BA + PR assignments due 11:59pm',tag:'⚠️ School'}:null,
-    !isSun?{time:'Sundays',label:'BA + PR assignments due 11:59pm',tag:'Upcoming'}:null,
+    isSun?{time:'11:59 pm',label:'Weekly assignments due',tag:'School'}:null,
+    !isSun&&isWeekday?{time:'Sundays',label:'Weekly assignments due 11:59pm',tag:'Upcoming'}:null,
   ].filter(Boolean);
   const el=document.getElementById('schedList');el.innerHTML='';
   if(!items.length){el.innerHTML='<div class="empty-state">No scheduled items today</div>';return}
@@ -524,7 +450,7 @@ function renderReminders(){
   if(!reminders.length){el.innerHTML='<div class="empty-state">No reminders</div>';return}
   reminders.forEach((r,i)=>{
     const row=document.createElement('div');row.className='rem-item';
-    row.innerHTML=`<div class="rem-dot" style="background:${colors[i%colors.length]}"></div><div class="rem-text">${r}</div><button class="rem-del" title="Remove">×</button>`;
+    row.innerHTML=`<div class="rem-dot" style="background:${colors[i%colors.length]}"></div><div class="rem-text">${r}</div><button class="rem-del" title="Remove">x</button>`;
     row.querySelector('.rem-del').addEventListener('click',()=>{reminders.splice(i,1);saveR();renderReminders()});
     el.appendChild(row);
   });
@@ -542,107 +468,69 @@ function renderTasks(){
   const open=src.filter(t=>!t.done),done=src.filter(t=>t.done);
   document.getElementById('taskCount').textContent=open.length+' open';
   [...open,...done].forEach(t=>{
-    const idx=src.findIndex(x=>x.id===t.id);
     const row=document.createElement('div');row.className='task-item';
     const chk=document.createElement('div');chk.className='chk'+(t.done?' done':'');
-    chk.addEventListener('click',()=>{tasks[idx].done=!tasks[idx].done;saveT();renderTasks()});
     const body=document.createElement('div');body.className='task-body';
-    body.innerHTML=`<div class="task-text${t.done?' done':''}">${t.text}</div><div class="task-sub">${t.tag}</div>`;
+    body.innerHTML=`<div class="task-text${t.done?' done':''}">${t.text}</div><div class="task-sub">${t.tag||''}</div>`;
     row.appendChild(chk);row.appendChild(body);el.appendChild(row);
   });
 }
 
-// ── COURSES ──────────────────────────────────────────
-function renderCourse(prefix,data,weekIdx){
-  const w=data[weekIdx];
-  document.getElementById(prefix+'-wk-label').textContent='Week '+w.week+' of 13';
-  document.getElementById(prefix+'-wk-dates').textContent=w.dates;
-  document.getElementById(prefix+'-topic').textContent=w.topic;
-  const rEl=document.getElementById(prefix+'-readings');rEl.innerHTML='';
-  w.readings.forEach(r=>{rEl.innerHTML+=`<div class="reading-item">${r}</div>`});
-  const aEl=document.getElementById(prefix+'-assigns');aEl.innerHTML='';
-  w.assignments.forEach((a,ai)=>{
-    const row=document.createElement('div');row.className='task-item';
-    const chk=document.createElement('div');chk.className='chk'+(a.done?' done':'');
-    chk.addEventListener('click',()=>{data[weekIdx].assignments[ai].done=!a.done;if(prefix==='ba')saveBA();else savePR();renderCourse(prefix,data,weekIdx)});
-    const body=document.createElement('div');body.className='task-body';
-    body.innerHTML=`<div class="task-text${a.done?' done':''}">${a.text}</div>${a.due?`<div class="task-sub">Due: ${a.due}</div>`:''}`;
-    row.appendChild(chk);row.appendChild(body);aEl.appendChild(row);
+// ── C x KCM PROJECTS ─────────────────────────────────
+function renderCxkcm(){
+  const el=document.getElementById('cxkcmProjects');
+  if(!el) return;
+  const projects=window._cxkcmProjects||[];
+  if(!projects.length){el.innerHTML='<div class="empty-state">No active projects</div>';return}
+  el.innerHTML='';
+  projects.forEach(p=>{
+    el.innerHTML+=`<div class="project-item"><div class="project-name">&#10022; ${p.text}</div></div>`;
   });
-  document.getElementById(prefix+'-prev').disabled=weekIdx===0;
-  document.getElementById(prefix+'-next').disabled=weekIdx===data.length-1;
+  const count=document.getElementById('projectCount');
+  if(count) count.textContent=(4+projects.length)+' active';
 }
 
-document.getElementById('ba-prev').addEventListener('click',()=>{if(baWeek>0){baWeek--;saveBA();renderCourse('ba',baData,baWeek)}});
-document.getElementById('ba-next').addEventListener('click',()=>{if(baWeek<12){baWeek++;saveBA();renderCourse('ba',baData,baWeek)}});
-document.getElementById('ba-add-btn').addEventListener('click',()=>{
-  const v=document.getElementById('ba-add-in').value.trim();if(!v)return;
-  baData[baWeek].assignments.push({text:v,due:'',done:false});saveBA();renderCourse('ba',baData,baWeek);document.getElementById('ba-add-in').value='';
-});
-document.getElementById('ba-add-in').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('ba-add-btn').click()});
-
-document.getElementById('pr-prev').addEventListener('click',()=>{if(prWeek>0){prWeek--;savePR();renderCourse('pr',prData,prWeek)}});
-document.getElementById('pr-next').addEventListener('click',()=>{if(prWeek<12){prWeek++;savePR();renderCourse('pr',prData,prWeek)}});
-document.getElementById('pr-add-btn').addEventListener('click',()=>{
-  const v=document.getElementById('pr-add-in').value.trim();if(!v)return;
-  prData[prWeek].assignments.push({text:v,due:'',done:false});savePR();renderCourse('pr',prData,prWeek);document.getElementById('pr-add-in').value='';
-});
-document.getElementById('pr-add-in').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('pr-add-btn').click()});
-
-// ── LAW & STORYTELLING ───────────────────────────────
-function renderLS(){
-  const dEl=document.getElementById('ls-dates');dEl.innerHTML='';
-  LS_DATES.forEach(d=>{dEl.innerHTML+=`<div class="ls-date-item">${d} · Wed 6:30–9:30pm</div>`});
-  const aEl=document.getElementById('ls-assigns');aEl.innerHTML='';
-
-  if(window._notionLawlit && window._notionLawlit.length){
-    // Find current week's assignment based on today's date
-    const today = new Date();
-    // Filter to upcoming/current items only — not done, and due date >= today or no due date
-    const upcoming = window._notionLawlit.filter(a => {
-      if(a.done) return false;
-      if(a.text.startsWith('N/A')) return false;
-      if(!a.due) return true;
-      return new Date(a.due) >= new Date(today.toISOString().slice(0,10));
-    });
-    // Sort by due date
-    upcoming.sort((a,b) => {
-      if(!a.due) return 1;
-      if(!b.due) return -1;
-      return new Date(a.due) - new Date(b.due);
-    });
-    // Show only next 2 upcoming
-    const toShow = upcoming.slice(0, 2);
-    if(!toShow.length){aEl.innerHTML='<div class="empty-state">No upcoming assignments</div>';return}
-    toShow.forEach(a=>{
-      const row=document.createElement('div');row.className='task-item';
-      const chk=document.createElement('div');chk.className='chk';
-      const body=document.createElement('div');body.className='task-body';
-      const sub = a.due ? `<div class="task-sub">Due: ${a.due}</div>` : '';
-      body.innerHTML=`<div class="task-text">${a.text}</div>${sub}`;
-      row.appendChild(chk);row.appendChild(body);aEl.appendChild(row);
-    });
-    return;
-  }
-
-  // Fall back to localStorage
-  if(!lsAssigns.length){aEl.innerHTML='<div class="empty-state">Syllabus coming soon — add readings below</div>';return}
-  lsAssigns.forEach((a,i)=>{
+// ── CAPSTONE TAB ──────────────────────────────────────
+function renderCapstone(){
+  const el=document.getElementById('capstone-assigns');if(!el)return;el.innerHTML='';
+  if(!capstoneAssigns.length){el.innerHTML='<div class="empty-state">Syllabus available Aug 22 — add assignments below</div>';return}
+  capstoneAssigns.forEach((a,i)=>{
     const row=document.createElement('div');row.className='task-item';
     const chk=document.createElement('div');chk.className='chk'+(a.done?' done':'');
-    chk.addEventListener('click',()=>{lsAssigns[i].done=!a.done;saveLS();renderLS()});
+    chk.addEventListener('click',()=>{capstoneAssigns[i].done=!a.done;saveCapstone();renderCapstone();renderWeekGlance()});
     const body=document.createElement('div');body.className='task-body';
-    const del=document.createElement('button');del.className='rem-del';del.textContent='×';del.style.marginLeft='auto';
-    del.addEventListener('click',()=>{lsAssigns.splice(i,1);saveLS();renderLS()});
+    const del=document.createElement('button');del.className='rem-del';del.textContent='x';del.style.marginLeft='auto';
+    del.addEventListener('click',()=>{capstoneAssigns.splice(i,1);saveCapstone();renderCapstone()});
     body.innerHTML=`<div class="task-text${a.done?' done':''}">${a.text}</div>`;
-    row.appendChild(chk);row.appendChild(body);row.appendChild(del);aEl.appendChild(row);
+    row.appendChild(chk);row.appendChild(body);row.appendChild(del);el.appendChild(row);
   });
 }
-document.getElementById('ls-add-btn').addEventListener('click',()=>{
-  const v=document.getElementById('ls-add-in').value.trim();if(!v)return;
-  lsAssigns.push({text:v,done:false});saveLS();renderLS();document.getElementById('ls-add-in').value='';
+document.getElementById('capstone-add-btn').addEventListener('click',()=>{
+  const v=document.getElementById('capstone-add-in').value.trim();if(!v)return;
+  capstoneAssigns.push({text:v,done:false});saveCapstone();renderCapstone();renderWeekGlance();document.getElementById('capstone-add-in').value='';
 });
-document.getElementById('ls-add-in').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('ls-add-btn').click()});
+document.getElementById('capstone-add-in').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('capstone-add-btn').click()});
+
+// ── BAR STUDIES TAB ───────────────────────────────────
+function renderBar(){
+  const el=document.getElementById('bar-assigns');if(!el)return;el.innerHTML='';
+  if(!barAssigns.length){el.innerHTML='<div class="empty-state">Add bar prep tasks below</div>';return}
+  barAssigns.forEach((a,i)=>{
+    const row=document.createElement('div');row.className='task-item';
+    const chk=document.createElement('div');chk.className='chk'+(a.done?' done':'');
+    chk.addEventListener('click',()=>{barAssigns[i].done=!a.done;saveBar();renderBar();renderWeekGlance()});
+    const body=document.createElement('div');body.className='task-body';
+    const del=document.createElement('button');del.className='rem-del';del.textContent='x';del.style.marginLeft='auto';
+    del.addEventListener('click',()=>{barAssigns.splice(i,1);saveBar();renderBar()});
+    body.innerHTML=`<div class="task-text${a.done?' done':''}">${a.text}</div>`;
+    row.appendChild(chk);row.appendChild(body);row.appendChild(del);el.appendChild(row);
+  });
+}
+document.getElementById('bar-add-btn').addEventListener('click',()=>{
+  const v=document.getElementById('bar-add-in').value.trim();if(!v)return;
+  barAssigns.push({text:v,done:false});saveBar();renderBar();renderWeekGlance();document.getElementById('bar-add-in').value='';
+});
+document.getElementById('bar-add-in').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('bar-add-btn').click()});
 
 // ── COURSE TABS ──────────────────────────────────────
 document.querySelectorAll('.course-tab').forEach(tab=>{
@@ -657,13 +545,12 @@ document.querySelectorAll('.course-tab').forEach(tab=>{
 // ── INIT ─────────────────────────────────────────────
 renderQuote();
 renderWeekGlance();
-loadNotionTasks();
 buildSchedule();
 renderReminders();
 renderTasks();
-renderCourse('ba',baData,baWeek);
-renderCourse('pr',prData,prWeek);
-renderLS();
+renderCapstone();
+renderBar();
+loadNotionTasks();
 </script>
 </body>
 </html>
