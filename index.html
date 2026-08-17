@@ -287,13 +287,35 @@ button:hover{background:var(--cream)}
       </div>
 
       <div class="course-panel" id="panel-bar">
-        <div style="font-size:11px;color:var(--warm-gray);margin-bottom:8px">Starts Aug 24 · Barbri · UWorld · Fleming's · Themis (MPRE) · Ends Dec 5–6</div>
-        <div class="assign-label">📚 Study Resources</div>
+        <div style="font-size:11px;color:var(--warm-gray);margin-bottom:10px">LAW6355 · Fall 2026 · Due every Sunday 11:59pm PT · <strong>Zero AI policy</strong> · Open book: printed black letter law only</div>
+
+        <!-- Key Dates Banner -->
+        <div style="background:var(--accent-navy);color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:11px;line-height:1.8">
+          <strong>📅 Key Dates:</strong>&nbsp;
+          Residency 1: Sep 19–20 &nbsp;|&nbsp;
+          <span style="color:#ffd700">Midterm: Oct 5–11 (15%)</span> &nbsp;|&nbsp;
+          Residency 2: Oct 10–11 &nbsp;|&nbsp;
+          Residency 3: Oct 31–Nov 1 &nbsp;|&nbsp;
+          <span style="color:#ffd700">Final Exam: Dec 5–6 (85%)</span>
+        </div>
+
+        <!-- Week Navigator -->
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <button id="bar-wk-prev" style="background:var(--card-bg);border:1px solid var(--light-border);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:13px">◀</button>
+          <div id="bar-wk-label" style="flex:1;text-align:center;font-weight:700;font-size:13px;color:var(--charcoal)"></div>
+          <button id="bar-wk-next" style="background:var(--card-bg);border:1px solid var(--light-border);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:13px">▶</button>
+        </div>
+
+        <!-- Week Content -->
+        <div id="bar-wk-content"></div>
+
+        <div class="assign-label" style="margin-top:14px">📚 Study Resources</div>
         <div class="reading-item">Barbri — primary bar prep</div>
         <div class="reading-item">UWorld — practice questions</div>
         <div class="reading-item">Fleming's — supplemental</div>
         <div class="reading-item">Themis — MPRE prep</div>
-        <div class="assign-label">📝 Tasks</div>
+
+        <div class="assign-label" style="margin-top:10px">📝 Personal Tasks</div>
         <div id="bar-assigns"><div class="empty-state">Add bar prep tasks below</div></div>
         <div class="course-add"><input type="text" id="bar-add-in" placeholder="Add bar prep task..."/><button id="bar-add-btn">Add</button></div>
       </div>
@@ -531,6 +553,68 @@ document.getElementById('bar-add-btn').addEventListener('click',()=>{
   barAssigns.push({text:v,done:false});saveBar();renderBar();renderWeekGlance();document.getElementById('bar-add-in').value='';
 });
 document.getElementById('bar-add-in').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('bar-add-btn').click()});
+
+// Bar Studies weekly schedule
+const BAR_WEEKS = [
+  { num:1, dates:'Aug 24–30', topic:'Introduction & Diagnostics', subject:'MBE Overview', flag:'',
+    assignments:['Barbri MBE Diagnostic (baseline)','Essay Writing Quiz','MBE Questions Quiz','Watch instructor video (required for attendance)'] },
+  { num:2, dates:'Aug 31–Sep 6', topic:'Torts: Defamation, Privacy, Strict Liability, Products Liability', subject:'Torts', flag:'',
+    assignments:['Torts Essay #1 — KXYZ (due Sun Sep 6)','MBE practice questions','Watch instructor video'] },
+  { num:3, dates:'Sep 7–13', topic:'Torts Review', subject:'Torts', flag:'⚠️ Labor Day Sep 7 (no class)',
+    assignments:['Torts Essay #2 — Rosebrite (due Sun Sep 13)','MBE practice questions','Watch instructor video'] },
+  { num:4, dates:'Sep 14–20', topic:'Crimes: Homicide & Inchoate Crimes', subject:'Criminal Law', flag:'🏛️ Residency 1: Sep 19–20',
+    assignments:['Torts Essay #3 (due Sun Sep 14)','Crimes Essay #1 (due Sun Sep 14)','Attend Residency 1 in-person Sep 19–20','Watch instructor video'] },
+  { num:5, dates:'Sep 21–27', topic:'Crimes: 4th/5th/6th Amendment & Crim Pro', subject:'Criminal Law / Crim Pro', flag:'',
+    assignments:['Crimes Essay #2 (due Sun Sep 27)','MBE practice questions','Watch instructor video'] },
+  { num:6, dates:'Sep 28–Oct 4', topic:'Midterm Review', subject:'Torts + Crimes Review', flag:'📝 Midterm next week — study!',
+    assignments:['Review all Torts and Crimes material','MBE practice questions','Watch instructor video'] },
+  { num:7, dates:'Oct 5–11', topic:'Professional Responsibility: Duty of Loyalty', subject:'PR', flag:'🔴 MIDTERM this week (15% of grade) · Residency 2: Oct 10–11',
+    assignments:['MIDTERM exam (open book: printed black letter law only)','Attend Residency 2 in-person Oct 10–11','Watch instructor video'] },
+  { num:8, dates:'Oct 12–18', topic:'Professional Responsibility: Other Issues', subject:'PR', flag:'',
+    assignments:['L-C Hypo (due Sun Oct 18)','MBE practice questions','Watch instructor video'] },
+  { num:9, dates:'Oct 19–25', topic:'PR Practice: Essays & MBE', subject:'PR', flag:'',
+    assignments:['PR Essay #1 (due Sun Oct 25)','MBE practice questions','Watch instructor video'] },
+  { num:10, dates:'Oct 26–Nov 1', topic:'Professional Responsibility: Integrity of Profession', subject:'PR', flag:'🏛️ Residency 3: Oct 31–Nov 1',
+    assignments:['PR Essay #2 (due Sun Nov 1)','PR Essay #3 (due Sun Nov 1)','Attend Residency 3 in-person Oct 31–Nov 1','Watch instructor video'] },
+  { num:11, dates:'Nov 2–8', topic:'Performance Test: Williams', subject:'Performance Test', flag:'',
+    assignments:['PT Williams — full practice performance test (due Sun Nov 8)','Watch instructor video'] },
+  { num:12, dates:'Nov 9–15', topic:'Performance Test: Davis (Graded)', subject:'Performance Test', flag:'⚠️ Veterans Day Nov 11 · Graded PT',
+    assignments:['PT Davis — GRADED performance test (due Sun Nov 15)','Watch instructor video'] },
+  { num:13, dates:'Nov 16–22', topic:'Final Exam Review & Study', subject:'All Subjects', flag:'🔴 Final Exam: Dec 5–6 (Residency 4) · Semester ends Dec 13',
+    assignments:['Comprehensive review: Torts, Crimes, PR, PT','Final: 1 Essay + 1 PT + 30 MBE questions (85% of grade)','Open book: printed black letter law only','Watch instructor video'] },
+];
+
+function getBarCurrentWeek(){
+  const start=new Date('2026-08-24');
+  const now=new Date();
+  const diff=Math.floor((now-start)/(7*24*60*60*1000));
+  return Math.max(0,Math.min(12,diff));
+}
+
+let barWeekIdx = getBarCurrentWeek();
+
+function renderBarWeek(){
+  const w=BAR_WEEKS[barWeekIdx];
+  const lbl=document.getElementById('bar-wk-label');
+  const content=document.getElementById('bar-wk-content');
+  if(!lbl||!content)return;
+  const isCurrentWeek=(barWeekIdx===getBarCurrentWeek());
+  lbl.innerHTML=`Week ${w.num} <span style="font-weight:400;color:var(--warm-gray)">(${w.dates})</span>${isCurrentWeek?' <span style="background:var(--accent-rose);color:#fff;border-radius:6px;padding:1px 7px;font-size:10px;margin-left:4px">THIS WEEK</span>':''}`;
+  let html=`<div style="background:var(--bg);border:1px solid var(--light-border);border-radius:10px;padding:12px">`;
+  html+=`<div style="font-weight:700;font-size:13px;color:var(--charcoal);margin-bottom:4px">${w.topic}</div>`;
+  html+=`<div style="font-size:11px;color:var(--accent-navy);margin-bottom:6px">Subject: ${w.subject}</div>`;
+  if(w.flag) html+=`<div style="font-size:11px;color:var(--accent-rose);font-weight:600;margin-bottom:8px">${w.flag}</div>`;
+  html+=`<div style="font-size:11px;color:var(--warm-gray);font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em">Assignments</div>`;
+  html+=w.assignments.map(a=>`<div class="reading-item" style="margin-bottom:4px">• ${a}</div>`).join('');
+  html+=`</div>`;
+  content.innerHTML=html;
+  document.getElementById('bar-wk-prev').disabled=(barWeekIdx===0);
+  document.getElementById('bar-wk-next').disabled=(barWeekIdx===12);
+}
+
+document.getElementById('bar-wk-prev').addEventListener('click',()=>{if(barWeekIdx>0){barWeekIdx--;renderBarWeek();}});
+document.getElementById('bar-wk-next').addEventListener('click',()=>{if(barWeekIdx<12){barWeekIdx++;renderBarWeek();}});
+renderBarWeek();
 
 // ── COURSE TABS ──────────────────────────────────────
 document.querySelectorAll('.course-tab').forEach(tab=>{
