@@ -280,9 +280,28 @@ button:hover{background:var(--cream)}
       </div>
 
       <div class="course-panel active" id="panel-capstone">
-        <div style="font-size:11px;color:var(--warm-gray);margin-bottom:8px">Starts Aug 24 · Syllabus Aug 22 · Weekly assignments due Sundays · Ends Dec 5–6</div>
-        <div class="assign-label">📝 Assignments</div>
-        <div id="capstone-assigns"><div class="empty-state">Syllabus available Aug 22 — add assignments below</div></div>
+        <div style="font-size:11px;color:var(--warm-gray);margin-bottom:10px">LAW7000 · Fall 2026 · Due every Sunday 11:59pm PST · <strong>No AI policy</strong> · Dean Andrea Funk</div>
+
+        <!-- Key Dates Banner -->
+        <div style="background:var(--accent-navy);color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:11px;line-height:1.8">
+          <strong>📅 Key Dates:</strong>&nbsp;
+          Residency 1: Sep 19–20 &nbsp;|&nbsp;
+          Residency 2: Oct 10–11 (Lawyering Skills) &nbsp;|&nbsp;
+          Residency 3: Oct 31–Nov 1 &nbsp;|&nbsp;
+          <span style="color:#ffd700">Final Exam: Dec 5–6 (50%)</span>
+        </div>
+
+        <!-- Week Navigator -->
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <button id="cap-wk-prev" style="background:var(--card-bg);border:1px solid var(--light-border);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:13px">◀</button>
+          <div id="cap-wk-label" style="flex:1;text-align:center;font-weight:700;font-size:13px;color:var(--charcoal)"></div>
+          <button id="cap-wk-next" style="background:var(--card-bg);border:1px solid var(--light-border);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:13px">▶</button>
+        </div>
+
+        <div id="cap-wk-content"></div>
+
+        <div class="assign-label" style="margin-top:14px">📝 Personal Tasks</div>
+        <div id="capstone-assigns"><div class="empty-state">Add capstone tasks below</div></div>
         <div class="course-add"><input type="text" id="capstone-add-in" placeholder="Add assignment..."/><button id="capstone-add-btn">Add</button></div>
       </div>
 
@@ -605,7 +624,7 @@ function renderBarWeek(){
   html+=`<div style="font-size:11px;color:var(--accent-navy);margin-bottom:6px">Subject: ${w.subject}</div>`;
   if(w.flag) html+=`<div style="font-size:11px;color:var(--accent-rose);font-weight:600;margin-bottom:8px">${w.flag}</div>`;
   html+=`<div style="font-size:11px;color:var(--warm-gray);font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em">Assignments</div>`;
-  html+=w.assignments.map(a=>`<div class="reading-item" style="margin-bottom:4px">• ${a}</div>`).join('');
+  html+=w.assignments.map(a=>`<div class="reading-item" style="margin-bottom:4px;list-style:none;padding-left:12px;text-indent:-8px">&ndash; ${a}</div>`).join('');
   html+=`</div>`;
   content.innerHTML=html;
   document.getElementById('bar-wk-prev').disabled=(barWeekIdx===0);
@@ -615,6 +634,67 @@ function renderBarWeek(){
 document.getElementById('bar-wk-prev').addEventListener('click',()=>{if(barWeekIdx>0){barWeekIdx--;renderBarWeek();}});
 document.getElementById('bar-wk-next').addEventListener('click',()=>{if(barWeekIdx<12){barWeekIdx++;renderBarWeek();}});
 renderBarWeek();
+
+// Capstone weekly schedule
+const CAP_WEEKS = [
+  { num:1, dates:'Aug 24–30', topic:'Introduction · Meet Your Client · Legal Research', flag:'⚠️ Post intro discussion by WEDNESDAY (required for attendance)',
+    assignments:['Post Introduction Discussion — due Wednesday 11:59pm (attendance)','PLO Pre-Assessment (Complete/Incomplete) — due Sunday','CEB Registration and Discussion (Complete/Incomplete) — due Sunday','Research Assignment (100 pts) — due Sunday','Watch Week 1 Introduction Video'] },
+  { num:2, dates:'Aug 31–Sep 6', topic:'Objective Memorandum with Recommendation', flag:'',
+    assignments:['Writing Assignment: Objective Memorandum (200 pts) — due Sunday','Watch Week 2 Introduction Video'] },
+  { num:3, dates:'Sep 7–13', topic:'Public Policy · Alternatives to Litigation / ADR', flag:'⚠️ Labor Day Sep 7',
+    assignments:['Week 3 Discussion: Public Policy (Complete/Incomplete) — due Sunday','Week 3 Assignment: ADR Case Study Exercise (Complete/Incomplete) — due Sunday','Watch Week 3 Introduction Video + Public Policy video'] },
+  { num:4, dates:'Sep 14–20', topic:'Cultural Competency Pt 1 · Performance Test Practice', flag:'🏛️ Residency 1: Sep 19–20 · Review Haynes v. National Bank of Columbia BEFORE residency (due Sat)',
+    assignments:['Week 4: Law Student Identity Reflection Exercise (Complete/Incomplete) — due Sunday','Performance Test Practice with PR — Short Objective Memo & Email (25 pts) — due Sunday','Review Haynes v. National Bank of Columbia — due Saturday before Residency','Attend Residency 1 in-person Sep 19–20','Watch Week 4 Introduction Video + videos'] },
+  { num:5, dates:'Sep 21–27', topic:'Cultural Competency Pt 2 · Implicit Bias · PT #1 (Practice)', flag:'',
+    assignments:['Implicit Bias Exercise Part 1 of 3 — review','Implicit Bias Exercise Part 2 of 3 Quiz (Complete/Incomplete) — due Sunday','Implicit Bias Exercise Part 3 of 3 (Complete/Incomplete) — due Sunday','Cultural Competence Exercise (Complete/Incomplete) — due Sunday','Performance Test #1 — Practice, not timed (Complete/Incomplete) — due Sunday','Watch Week 5 Introduction Video + videos'] },
+  { num:6, dates:'Sep 28–Oct 4', topic:'Access to Justice Pt 1 · PT Self-Assessment #1', flag:'',
+    assignments:['Billable Time Exercise (Complete/Incomplete) — due Sunday','Performance Test Self-Assessment #1 (25 pts) — due Sunday','Access to Justice Exercise (Complete/Incomplete) — due Sunday of Week 7','Watch Week 6 Introduction Video'] },
+  { num:7, dates:'Oct 5–11', topic:'Access to Justice Pt 2 · PT #2 (Timed 90 min)', flag:'🏛️ Residency 2: Oct 10–11 (Lawyering Skills Track)',
+    assignments:['Submit Access to Justice Exercise (Complete/Incomplete) — due Sunday','Performance Test #2 (25 pts) — 90 min timed, available Monday — due Sunday','Attend Residency 2 in-person Oct 10–11','Watch Week 7 Introduction Video'] },
+  { num:8, dates:'Oct 12–18', topic:'The Modern Lawyer · AI in California Legal Practice · PT Self-Assessment #2', flag:'',
+    assignments:['Assignment: Appropriateness of AI in California Legal Practice (Complete/Incomplete) — due Sunday','Quiz: AI (Complete/Incomplete) — due Sunday','Performance Test Self-Assessment #2 (25 pts) — due Sunday','Watch Week 8 Introduction Video'] },
+  { num:9, dates:'Oct 19–25', topic:'Modern Lawyer cont. · AI & Access to Justice · PT #3 (Timed 90 min)', flag:'',
+    assignments:['Assignment: AI and Access to Justice (Complete/Incomplete) — due Sunday','Performance Test #3 (25 pts) — 90 min timed, available Monday — due Sunday','Watch Week 9 Introduction Video'] },
+  { num:10, dates:'Oct 26–Nov 1', topic:'Remote Work · Multijurisdictional Lawyering · PT Self-Assessment #3', flag:'🏛️ Residency 3: Oct 31–Nov 1',
+    assignments:['Assignment: Remote Work & Multijurisdictional Lawyering (Complete/Incomplete) — due Sunday of Week 11','Performance Test Self-Assessment #3 (25 pts) — due Sunday','Attend Residency 3 in-person Oct 31–Nov 1','Watch Week 10 Introduction Video'] },
+  { num:11, dates:'Nov 2–8', topic:'Modern Lawyer cont. · PT #4 (Timed 90 min)', flag:'',
+    assignments:['Submit Remote Work Assignment (carry-over from Week 10) — due Sunday','Performance Test #4 (25 pts) — 90 min timed, available Monday — due Sunday','Watch Week 11 Introduction Video'] },
+  { num:12, dates:'Nov 9–15', topic:'Wellness · Professional Identity · PLO Post-Assessment · PT Self-Assessment #4', flag:'⚠️ Veterans Day Nov 11',
+    assignments:['Discussion: Create Your Professional Identity Video (Complete/Incomplete) — due Sunday','PLO Post-Assessment (Complete/Incomplete) — due Sunday','Performance Test Self-Assessment #4 (25 pts) — due Sunday','Watch Week 12 Introduction Video + wellness/identity weblinks'] },
+  { num:13, dates:'Nov 16–29', topic:'Course Review · Bar Exam Planning · Final Exam Prep', flag:'🔴 Final Exam: Dec 5–6 (Residency 4) — 3-hour in-person, 50% of grade · Thanksgiving Nov 26',
+    assignments:['Review all PT self-assessments and feedback','Review research, writing, and PT strategy','Watch Week 13 Introduction Video','FINAL EXAM on campus Dec 5–6 — 3 hours (open book rules may vary — confirm with professor)'] },
+];
+
+function getCapCurrentWeek(){
+  const start=new Date('2026-08-24');
+  const now=new Date();
+  const diff=Math.floor((now-start)/(7*24*60*60*1000));
+  return Math.max(0,Math.min(12,diff));
+}
+
+let capWeekIdx = getCapCurrentWeek();
+
+function renderCapWeek(){
+  const w=CAP_WEEKS[capWeekIdx];
+  const lbl=document.getElementById('cap-wk-label');
+  const content=document.getElementById('cap-wk-content');
+  if(!lbl||!content)return;
+  const isCurrentWeek=(capWeekIdx===getCapCurrentWeek());
+  lbl.innerHTML=`Week ${w.num} <span style="font-weight:400;color:var(--warm-gray)">(${w.dates})</span>${isCurrentWeek?' <span style="background:var(--accent-rose);color:#fff;border-radius:6px;padding:1px 7px;font-size:10px;margin-left:4px">THIS WEEK</span>':''}`;
+  let html=`<div style="background:var(--bg);border:1px solid var(--light-border);border-radius:10px;padding:12px">`;
+  html+=`<div style="font-weight:700;font-size:13px;color:var(--charcoal);margin-bottom:4px">${w.topic}</div>`;
+  if(w.flag) html+=`<div style="font-size:11px;color:var(--accent-rose);font-weight:600;margin-bottom:8px">${w.flag}</div>`;
+  html+=`<div style="font-size:11px;color:var(--warm-gray);font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em">Assignments</div>`;
+  html+=w.assignments.map(a=>`<div class="reading-item" style="margin-bottom:4px;padding-left:12px;text-indent:-8px">&ndash; ${a}</div>`).join('');
+  html+=`</div>`;
+  content.innerHTML=html;
+  document.getElementById('cap-wk-prev').disabled=(capWeekIdx===0);
+  document.getElementById('cap-wk-next').disabled=(capWeekIdx===12);
+}
+
+document.getElementById('cap-wk-prev').addEventListener('click',()=>{if(capWeekIdx>0){capWeekIdx--;renderCapWeek();}});
+document.getElementById('cap-wk-next').addEventListener('click',()=>{if(capWeekIdx<12){capWeekIdx++;renderCapWeek();}});
+renderCapWeek();
 
 // ── COURSE TABS ──────────────────────────────────────
 document.querySelectorAll('.course-tab').forEach(tab=>{
