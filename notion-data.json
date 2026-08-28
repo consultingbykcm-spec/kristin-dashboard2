@@ -1,12 +1,16 @@
 {
   "master": [
     {
+      "text": "Social Media Posts",
+      "done": false
+    },
+    {
       "text": "KDP Soft Cover Launch — Ferlina",
       "done": true
     },
     {
       "text": "Program Manager Meeting",
-      "done": false
+      "done": true
     },
     {
       "text": "DS Paper Revision — Professor Lane",
@@ -26,7 +30,7 @@
     },
     {
       "text": "Ingram Spark Hard Cover — Ferlina",
-      "done": false
+      "done": true
     },
     {
       "text": "LegalMinds Game — Weekly Build",
@@ -66,7 +70,7 @@
     },
     {
       "text": "KDP",
-      "done": false
+      "done": true
     },
     {
       "text": "Pinsites",
@@ -114,7 +118,7 @@
     },
     {
       "text": "Belle Burden’s “Strangers”",
-      "done": false
+      "done": true
     },
     {
       "text": "Fwd: MPRE Update",
