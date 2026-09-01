@@ -1,6 +1,14 @@
 {
   "master": [
     {
+      "text": "Internship Class",
+      "done": false
+    },
+    {
+      "text": "Internship Dates",
+      "done": false
+    },
+    {
       "text": "Social Media Posts",
       "done": false
     },
