@@ -1,16 +1,20 @@
 {
   "master": [
     {
-      "text": "Internship Class",
+      "text": "Sunday Vargas Check In",
       "done": false
     },
     {
-      "text": "Internship Dates",
+      "text": "Internship Class",
+      "done": true
+    },
+    {
+      "text": "Clinic Dates",
       "done": false
     },
     {
       "text": "Social Media Posts",
-      "done": false
+      "done": true
     },
     {
       "text": "KDP Soft Cover Launch — Ferlina",
@@ -27,10 +31,6 @@
     {
       "text": "Pro Bono Placement",
       "done": true
-    },
-    {
-      "text": "Delaware Nonprofit Filing — EJC",
-      "done": false
     },
     {
       "text": "IRS 1023-EZ — 501(c)(3) Application",
@@ -58,11 +58,7 @@
     },
     {
       "text": "Email K. Kaine - Scholarships",
-      "done": false
-    },
-    {
-      "text": "Landing Page",
-      "done": false
+      "done": true
     },
     {
       "text": "We are Good Trouble",
@@ -94,7 +90,7 @@
     },
     {
       "text": "Equality. Justice. Change. ",
-      "done": false
+      "done": true
     },
     {
       "text": "Add to Paper: Why Roe ",
